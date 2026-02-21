@@ -1657,23 +1657,7 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    body {
-        padding-top: 88px;
-    }
-    
-    .section {
-        padding: 60px 0;
-    }
-    
-    .section-title {
-        margin-bottom: 12px;
-    }
-    
-    .section-header {
-        margin-bottom: 45px;
-    }
-}
+
 
 @media (max-width: 576px) {
     body {
@@ -1712,5 +1696,159 @@ img {
     
     body {
         padding-top: 0;
+    }
+}
+
+/* --- Melhorias do Menu Mobile --- */
+@media (max-width: 768px) {
+    /* Trava o scroll da página quando o menu abrir (precisa de classe no body via JS) */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh; /* Ocupa a tela toda */
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px); /* Efeito glassmorphism */
+        flex-direction: column;
+        justify-content: center; /* Centraliza os itens verticalmente */
+        align-items: center;
+        padding: 20px;
+        gap: 30px;
+        /* Usa transform em vez de right para animação 60fps */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 999;
+    }
+    
+    .nav-links.nav-active {
+        transform: translateX(0);
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem; /* Fonte maior para toque no celular */
+    }
+
+    .btn-nav {
+        width: auto;
+        min-width: 200px;
+        text-align: center;
+    }
+
+    /* Animação do ícone Hamburger virando X */
+    .hamburger {
+        position: relative;
+        z-index: 1000; /* Fica acima do menu aberto */
+    }
+
+    .hamburger.toggle .line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.toggle .line:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px); /* Some deslizando */
+    }
+    .hamburger.toggle .line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
+/* --- Otimização das Animações de Scroll --- */
+.fade-up, .reveal-left, .reveal-right, .reveal-bottom {
+    opacity: 0;
+    /* Adicionado will-change para avisar o browser que isso vai animar (melhora performance) */
+    will-change: transform, opacity;
+    /* Curva mais suave e premium */
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-up { transform: translateY(40px); }
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-bottom { transform: translateY(40px); }
+
+/* --- Ajustes do Hero para Mobile (Evitar sobreposição da navbar) --- */
+@media (max-width: 768px) {
+    .hero {
+        /* Compensa a barra de urgência + navbar no mobile */
+        padding: 140px 15px 60px;
+    }
+    
+    .hero h1 {
+        font-size: clamp(2rem, 8vw, 2.5rem); /* Ajuste dinâmico melhorado */
+    }
+}
+
+/* 1. TRAVA GLOBAL: Resolve o scroll horizontal fantasma de uma vez por todas */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    /* 2. PROTEÇÃO DO CONTAINER: Impede que a navbar vaze a tela */
+    .nav-container {
+        width: 100%;
+        max-width: 100%; /* Força o limite na largura da tela */
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    /* 3. FIX DO HAMBURGUER: Garante o tamanho fixo e alinhamento */
+    .hamburger {
+        width: 30px;
+        height: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-shrink: 0; /* Impede que o flexbox "esmague" o ícone se o logo for grande */
+        z-index: 1002; /* Fica acima de tudo, inclusive do menu aberto */
+        cursor: pointer;
+    }
+
+    .hamburger .line {
+        width: 100%;
+        height: 2px;
+        margin: 0; /* Remove margins antigas para usar o justify-content: space-between */
+        background-color: var(--black);
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Ajuste milimétrico do "X" do hambúrguer */
+    .hamburger.toggle .line:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+    }
+    .hamburger.toggle .line:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    .hamburger.toggle .line:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    /* 4. FIX DO MENU: Largura correta e altura dinâmica */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%; /* 100% é mais seguro que 100vw, pois não contabiliza a barra de rolagem nativa */
+        height: 100dvh; /* dvh (dynamic viewport height) previne bugs com a barra de endereço do Chrome/Safari mobile */
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        gap: 30px;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 1000;
+        /* Trava o scroll interno do menu caso fique muito alto */
+        overflow-y: auto; 
     }
 }
