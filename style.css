@@ -406,7 +406,7 @@ img {
 .hero {
     min-height: 100vh;
     background: linear-gradient(135deg, rgba(43, 43, 43, 0.7) 0%, rgba(74, 74, 74, 0.7) 100%),
-                url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=1920&q=80');
+                url('images/clinica.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1377,7 +1377,7 @@ img {
 /* --- CTA Final --- */
 .final-cta {
     background: linear-gradient(135deg, rgba(43, 43, 43, 0.9) 0%, rgba(74, 74, 74, 0.9) 100%),
-                url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80');
+                url('images/clinica_dentro_a.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
