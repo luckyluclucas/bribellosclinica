@@ -296,22 +296,35 @@ img {
     width: 100%;
 }
 
-.btn-nav {
+.nav-links a.btn-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background: linear-gradient(135deg, var(--primary-dark), var(--primary));
     color: var(--white) !important;
-    padding: 10px 20px;
+    padding: 12px 30px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.85rem !important;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(189, 140, 140, 0.3);
+    white-space: nowrap;
+    line-height: normal;
 }
 
-.btn-nav::after {
+.nav-links a.btn-nav i {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.nav-links a.btn-nav::after {
     display: none;
 }
 
-.btn-nav:hover {
+.nav-links a.btn-nav:hover {
     background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(189, 140, 140, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(189, 140, 140, 0.4);
 }
 
 .hamburger {
@@ -383,10 +396,13 @@ img {
         font-size: 0.95rem;
     }
     
-    .btn-nav {
+    .nav-links a.btn-nav {
         width: 100%;
-        display: block;
-        padding: 15px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 18px 24px;
+        font-size: 0.95rem !important; /* Force override for mobile */
     }
     
     .toggle .line:nth-child(1) {
