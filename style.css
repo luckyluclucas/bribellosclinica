@@ -783,7 +783,7 @@ img {
 
 .result-image {
     position: relative;
-    height: 250px;
+    height: 350px; /* Altura aumentada para mostrar todo o rosto */
     overflow: hidden;
 }
 
@@ -791,6 +791,7 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 15%;
     transition: var(--transition);
 }
 
